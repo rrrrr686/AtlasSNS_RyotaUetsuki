@@ -1,18 +1,29 @@
 <x-logout-layout>
 
+<!-- 新規登録ページと同じCSSを読み込む -->
+  <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+
   <!-- 適切なURLを入力してください -->
-  {!! Form::open(['url' => '〇〇']) !!}
+    <div class="login-container">
+  {!! Form::open(['url' => '/login', 'method' => 'post']) !!}
 
-  <p>AtlasSNSへようこそ</p>
+  <h2 class="form-title">AtlasSNSへようこそ</h2>
 
-  {{ Form::label('email') }}
-  {{ Form::text('email',null,['class' => 'input']) }}
-  {{ Form::label('password') }}
-  {{ Form::password('password',['class' => 'input']) }}
+  <div class="form-group">
+      {{ Form::label('メールアドレス') }}
+      {{ Form::email('email', null, ['class' => 'input', 'placeholder' => 'example@mail.com']) }}
+    </div>
 
-  {{ Form::submit('ログイン') }}
+    <div class="form-group">
+      {{ Form::label('パスワード') }}
+      {{ Form::password('password', ['class' => 'input', 'placeholder' => '●●●●●●']) }}
+    </div>
 
-  <p><a href="register">新規ユーザーの方はこちら</a></p>
+    <div class="form-submit">
+      {{ Form::submit('ログイン', ['class' => 'submit-btn']) }}
+    </div>
+
+    <p><a href="{{ url('register') }}" class="form-login-link">新規ユーザーの方はこちら</a></p>
 
   {!! Form::close() !!}
 

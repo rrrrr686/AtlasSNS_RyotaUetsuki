@@ -1,10 +1,17 @@
 <x-logout-layout>
-  <div id="clear">
-    <p>〇〇さん</p>
-    <p>ようこそ！AtlasSNSへ！</p>
-    <p>ユーザー登録が完了しました。</p>
-    <p>早速ログインをしてみましょう。</p>
 
-    <p class="btn"><a href="login">ログイン画面へ</a></p>
-  </div>
+<!-- register.cssを流用 -->
+<link rel="stylesheet" href="{{ asset('css/register.css') }}">
+
+<div class="added-background">
+    <p class="bold-white">{{ session('username') }} さん</p>
+    <p class="bold-white">ようこそ！AtlasSNSへ</p>
+
+    <p class="light-white">ユーザー登録が完了いたしました。</p>
+    <p class="light-white">早速ログインをしてみましょう！</p>
+
+
+    <a href="{{ url('login') }}" class="submit-btn">ログイン画面へ</a>
+
+</div>
 </x-logout-layout>

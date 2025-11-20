@@ -1,0 +1,138 @@
+/* ===============================
+   ヘッダー全体のデザイン
+   =============================== */
+.header-blue {
+  background-color: #186AC9;
+  color: #fff;
+  padding: 20px 20px;
+  position: relative;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ロゴ */
+.logo img {
+  height: 45px;
+}
+
+/* ===============================
+   アコーディオン部分
+   =============================== */
+.user-info {
+  position: relative;
+}
+
+/* チェックボックス非表示 */
+.accordion-toggle {
+  display: none;
+}
+
+/* アコーディオン見出し */
+.accordion-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.accordion-header p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 18px;
+  /* ← 〇〇さんの文字サイズを大きく */
+}
+
+.arrow {
+  font-size: 20px;
+  display: inline-block;
+  line-height: 1;
+  vertical-align: middle;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  /* 下向き */
+}
+
+.arrow.rotate {
+  transform: rotate(90deg);
+  /* 上向き */
+}
+
+.user-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+/* ===============================
+   ドロップダウンメニュー
+   =============================== */
+.accordion-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border-radius: 6px;
+  width: 19%;
+  /* サイドバーと同じ幅に */
+  min-width: 260px;
+  /* 小画面対策 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  margin-top: 8px;
+  box-sizing: border-box;
+  /* padding込みの正確な幅計算 */
+}
+
+/* JSで.activeをつけたときに表示 */
+.accordion-content.active {
+  display: block;
+}
+
+/* チェックONで矢印を反転 */
+.accordion-toggle:checked+.accordion-header .arrow {
+  transform: rotate(180deg);
+}
+
+/* メニュー内リスト項目 */
+.accordion-content li {
+  list-style: none;
+}
+
+/* ===== リンク・ボタン共通スタイル ===== */
+.accordion-content li a,
+.accordion-content li button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  /* 真ん中揃え */
+  padding: 30px 0;
+  /* ✅ 高さを大きくして押しやすく */
+  color: #555;
+  /* 灰色文字 */
+  text-decoration: none;
+  border: none;
+  background: none;
+  font-size: 20px;
+  /* ✅ 文字を大きくして見やすく */
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* ホバー時の色変更 */
+.accordion-content li a:hover,
+.accordion-content li button:hover {
+  background-color: #186AC9;
+  /* 青背景 */
+  color: #fff;
+}
+
+/* 白文字 *

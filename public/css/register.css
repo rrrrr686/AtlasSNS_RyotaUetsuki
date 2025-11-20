@@ -1,0 +1,94 @@
+/* 見出しを中央揃え */
+.login-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  font-family: 'Noto Sans JP', 'Hiragino Sans', 'メイリオ', sans-serif;
+}
+
+/*ログインフォーム全体を画面中央に下げる（registerと同じレイアウト） */
+.login-container {
+  /* body全体に対して縦横中央寄せ */
+  position: absolute;
+  /* ← 追加 */
+  top: 60%;
+  /* ← 追加 */
+  left: 50%;
+  /* ← 追加 */
+  transform: translate(-50%, -50%);
+  /* ← 追加 */
+
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ログインボタンを右寄せ */
+.form-submit {
+  text-align: right;
+}
+
+/* ボタンのデザインを登録ページと合わせる */
+.submit-btn {
+  display: block;
+  /* ブロック化して幅全体を使う */
+  width: fit-content;
+  /* 必要なら自動幅（固定したいなら max-width 指定もOK） */
+  margin: 20px auto 0;
+  /* 上下余白を入れて中央寄せ */
+  text-align: center;
+  /* テキスト中央 */
+  background-color: #e53935;
+  /* 赤背景 */
+  color: #fff;
+  /* 白文字 */
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  /* 下線消す */
+  cursor: pointer;
+}
+
+
+.submit-btn:hover {
+  background-color: #c53030;
+}
+
+
+/* added.blade.php用のフォーム背景（ログインと同じ黒半透明） */
+.added-background {
+  background: rgba(0, 0, 0, 0.2);
+  /* 黒背景、透明度30% */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* 上2行（ユーザーネーム・ようこそ）を太字に */
+.bold-white {
+  font-weight: 700;
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+/* 「ようこそ！」の下だけ間隔を広めに */
+.bold-white+.light-white {
+  margin-top: 25px;
+}
+
+.light-white {
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 5px;
+}

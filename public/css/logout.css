@@ -1,10 +1,239 @@
 @charset "UTF-8";
 
-html{
+/* ページ全体を縦横100%に */
+html,
+body {
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-body{
-    height: 100%;
+
+/* 背景：上が淡い青、下が黄色 */
+body {
+    background: linear-gradient(to bottom, #186AC9 50%,
+            #FFF200 100%);
+    color: #fff;
+    font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;
+    overflow: hidden;
+    /* ← スクロール防止で余分なはみ出しを防ぐ */
+}
+
+/* ヘッダー（ロゴ部分） */
+header {
+    text-align: center;
+    padding-top: 20px;
+}
+
+header img {
+    width: 150px;
+    margin-bottom: 5px;
+    /* ロゴとテキストの間隔を少し詰める */
+}
+
+header p {
+    margin-top: -15px;
+    font-size: 2.3rem;
+    /* ← ここを大きく変更（元は1.1rem） */
+    font-weight: 700;
+    letter-spacing: 1px;
+    /* ← 少し間を空けて見やすく */
+    font-family: 'Noto Sans JP', 'Hiragino Sans', 'メイリオ', sans-serif;
+}
+
+/* 中央のフォーム全体を中央寄せ */
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* ← 中央から上寄せに変更 */
+    min-height: 100vh;
+    /* 画面いっぱい */
+    padding: 30px 0 60px 0;
+    /* 上: ロゴとの距離 下: フォーム下余白 */
+    box-sizing: border-box;
+}
+
+/* 中のフォームボックス */
+form {
+    background: rgba(0, 0, 0, 0.2);
+    /* 黒＋20%の不透明度 */
+    color: #fff;
+    /* 文字を白に変更 */
+    padding: 20px 30px;
+    /* ← 高さを抑える（40px → 25px） */
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    width: 350px;
+    margin-bottom: 40px;
+    /* 下の余白 */
+}
+
+/* フォーム内のタイトル */
+h2 {
+    text-align: center;
+    /* 中央揃え */
+    color: #fff;
+    /* 白文字 */
+    font-size: 2rem;
+    /* 少し小さめ */
+    margin-bottom: 20px;
+    /* 下にスペース */
+    margin-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    color: #000;
+    /* ← 文字を黒に */
+    background: rgba(255, 255, 255, 0.8);
+    /* ← 背景を白に近づけて文字を見やすく */
+}
+
+/* フォーム内のボタンとリンクをまとめて配置 */
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    /* 縦に並べる */
+    align-items: flex-end;
+    /* 新規登録ボタンは右寄せ */
+    margin-top: 10px;
+}
+
+/* 送信ボタン「新規登録」 */
+.submit-btn {
+    background: #e53935;
+    /* 赤背景 */
+    color: #fff;
+    /* 白文字 */
+    border: none;
+    padding: 10px 0;
+    width: 50%;
+    /* フォーム幅の半分 */
+    border-radius: 6px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    float: none;
+    /* float を無効化 */
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #0f4ea6;
+}
+
+a {
+    display: block;
+    /* ブロックにする */
+    text-align: center;
+    /* 中央揃え */
+    margin-top: 20px;
+    /* 上に余白 */
+    color: #fff;
+    /* 白文字 */
+    text-decoration: underline;
+    /* 下線付き */
+    float: none;
+    /* 右寄せの影響を消す */
+}
+
+/* ログインリンク */
+.form-login-link {
+    align-self: center;
+    /* 中央寄せ */
+    margin-top: 10px;
+    color: #fff;
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ここからログイン後画面 */
+.header-blue {
     background: #186AC9;
+    /* 青帯 */
+    padding: 10px 20px;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+}
+
+/* ユーザー情報とアイコン */
+.user-info-container {
+    position: relative;
+    /* アコーディオン用 */
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 700;
+}
+
+.user-info .arrow {
+    transition: transform 0.3s;
+}
+
+.user-info .arrow.open {
+    transform: rotate(180deg);
+}
+
+.user-info .user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* アコーディオンの中身 */
+.accordion-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #186AC9;
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    border-radius: 6px;
+    min-width: 150px;
+}
+
+.accordion-content li {
+    padding: 5px 20px;
+}
+
+.accordion-content li a,
+.accordion-content li button {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.accordion-content li a:hover,
+.accordion-content li button:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
