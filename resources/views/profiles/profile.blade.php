@@ -66,13 +66,23 @@
                     </div>
 
                     <!-- アイコンアップロード -->
-                    <div class="form-group form-inline">
-                        <label for="icon_image">アイコン画像</label>
-                        <input type="file" name="icon_image" id="icon_image">
-                        @error('icon_image')
-                            <p class="error">{{ $message }}</p>
-                        @enderror
-                    </div>
+<div class="form-group form-inline">
+    <label class="file-text-label">アイコン画像</label>
+
+    <!-- ファイル選択ラベル -->
+    <label for="icon_image" class="icon-label">
+        ファイルを選択
+    </label>
+
+    <input type="file" name="icon_image" id="icon_image" class="icon-input">
+
+    @error('icon_image')
+        <p class="error">{{ $message }}</p>
+    @enderror
+</div>
+
+
+
 
                     <!-- 更新ボタン -->
                     <div class="form-group">

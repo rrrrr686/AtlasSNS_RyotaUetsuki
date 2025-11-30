@@ -24,43 +24,48 @@ class ProfileController extends Controller
 
     // プロフィール更新処理
     public function update(Request $request)
-    {
-        $user = Auth::user();
+{
+    $user = Auth::user();
 
-        // バリデーション
-        $request->validate([
-            'username' => 'required|string|min:2|max:12',
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'min:5',
-                'max:40',
-                Rule::unique('users', 'email')->ignore($user->id),
-            ],
-            'password' => ['nullable', 'string', 'min:8', 'max:20', 'regex:/^[a-zA-Z0-9]+$/', 'confirmed'],
-            'bio' => 'nullable|string|max:150',
-            'icon_image' => 'nullable|image|mimes:jpg,jpeg,png,bmp,gif,svg|max:2048',
-        ]);
+    // バリデーション
+    $request->validate([
+        'username' => 'required|string|min:2|max:12',
+        'email' => [
+            'required',
+            'string',
+            'email',
+            'min:5',
+            'max:40',
+            Rule::unique('users', 'email')->ignore($user->id),
+        ],
+        'password' => [
+            'required',
+            'string',
+            'min:8',
+            'max:20',
+            'regex:/^[a-zA-Z0-9]+$/',
+            'confirmed',
+        ],
+        'bio' => 'nullable|string|max:150',
+        'icon_image' => 'nullable|image|mimes:jpg,jpeg,png,bmp,gif,svg|max:2048',
+    ]);
 
-        // データ更新
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->bio = $request->bio;
+    // データ更新
+    $user->username = $request->username;
+    $user->email = $request->email;
+    $user->bio = $request->bio;
 
-        if ($request->password) {
-            $user->password = Hash::make($request->password);
-        }
+    // パスワード更新（必須なのでそのまま代入）
+    $user->password = Hash::make($request->password);
 
-        if ($request->hasFile('icon_image')) {
-    $path = $request->file('icon_image')->store('public/icons');
-    $user->icon_image = basename($path);
-}
-
-
-        $user->save();
-
-        return redirect()->route('profile.edit')->with('success', 'プロフィールを更新しました。');
+    // アイコン画像更新
+    if ($request->hasFile('icon_image')) {
+        $path = $request->file('icon_image')->store('icons', 'public');
+        $user->icon_image = basename($path);
     }
 
+    $user->save();
+
+    return redirect('/top')->with('success', 'プロフィールを更新しました。');
+}
 }

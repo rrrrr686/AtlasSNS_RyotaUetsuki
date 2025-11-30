@@ -12,14 +12,24 @@ class PostsController extends Controller
      * トップページ（投稿一覧）
      */
     public function index()
-    {
-        $user = Auth::user();
+{
+    $user = auth()->user();
 
-        // 投稿一覧を新しい順で取得（ユーザー情報も取得）
-        $posts = Post::with('user')->latest()->get();
+    // 自分がフォローしているユーザーのIDを取得
+    $followedUserIds = $user->followings()->pluck('users.id')->toArray();
 
-        return view('posts.index', compact('user', 'posts'));
-    }
+    // 自分のIDも追加
+    $followedUserIds[] = $user->id;
+
+    // 自分 + フォローしているユーザーの投稿
+    $posts = Post::whereIn('user_id', $followedUserIds)
+                 ->orderBy('created_at', 'desc')
+                 ->get();
+
+    // ビュー名を修正
+    return view('posts.index', compact('posts'));
+}
+
 
     /**
      * 投稿処理

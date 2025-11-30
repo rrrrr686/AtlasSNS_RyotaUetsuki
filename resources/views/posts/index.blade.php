@@ -67,36 +67,47 @@
   </div>
 
   <!-- 編集モーダル -->
-  <div id="editModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <span id="closeModal" class="close">&times;</span>
+<div id="editModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <form id="editForm" method="POST">
+      @csrf
+      @method('PUT')
+      <textarea name="post" id="editPostText" required></textarea>
 
-      <form id="editForm" method="POST">
-        @csrf
-        @method('PUT')
-        <textarea name="post" id="editPostText" required></textarea>
-        <button type="submit">更新</button>
-      </form>
-    </div>
+      <!-- 更新ボタンをアイコンに -->
+      <button type="submit" class="edit-submit-btn">
+        <img src="{{ asset('images/edit.png') }}" alt="編集" class="action-icon edit-icon">
+      </button>
+    </form>
   </div>
+</div>
+
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const modal = document.getElementById('editModal');
-      const closeBtn = document.getElementById('closeModal');
       const editForm = document.getElementById('editForm');
       const editText = document.getElementById('editPostText');
 
-      document.querySelectorAll('.edit-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-          const postId = this.dataset.postId;
-          const postContent = this.dataset.postContent;
+      document.querySelectorAll('.post-actions .edit-btn').forEach(btn => {
+  btn.addEventListener('click', function (e) {
+    e.preventDefault(); // フォーム送信を防ぐ
+    const postId = this.dataset.postId;
+    const postContent = this.dataset.postContent;
 
-          editForm.action = `/posts/${postId}`;
-          editText.value = postContent;
-          modal.style.display = 'block';
-        });
-      });
+      console.log('編集する投稿ID:', postId); // ←確認用
+
+    const editForm = document.getElementById('editForm');
+    const editText = document.getElementById('editPostText');
+    const modal = document.getElementById('editModal');
+
+    editForm.action = `/posts/${postId}`;
+    editText.value = postContent;
+
+    modal.style.display = 'block';
+  });
+});
+
 
       closeBtn.addEventListener('click', () => modal.style.display = 'none');
       window.addEventListener('click', (e) => {

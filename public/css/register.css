@@ -11,7 +11,8 @@
 
 /*ログインフォーム全体を画面中央に下げる（registerと同じレイアウト） */
 .login-container {
-  /* body全体に対して縦横中央寄せ */
+  min-height: 100vh;
+  /* 画面の高さに合わせる */
   position: absolute;
   /* ← 追加 */
   top: 60%;
@@ -28,6 +29,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  /* 縦中央 */
+  padding: 20px;
+  /* スマホで見切れ防止 */
+}
+
+.login-container form {
+  width: 100%;
+  max-width: 380px;
+  /* スマホで横切れないように */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
 }
 
 /* ログインボタンを右寄せ */

@@ -16,11 +16,13 @@ header {
 ================================ */
 #row {
     display: flex;
-    flex-flow: row wrap;
+    align-items: stretch;
+    /* これで左右の高さを揃える */
 }
 
 #container {
-    flex: 0 0 80%;
+    flex: 1;
+    /* 残り幅を全部使う */
 }
 
 #side-bar {
@@ -28,6 +30,8 @@ header {
     border-left: 1px solid #727272;
     padding: 20px;
     background-color: #f9f9f9;
+    min-height: 100vh;
+    /* ビューポートの高さに合わせる */
 }
 
 /* ================================
@@ -196,6 +200,13 @@ header {
     margin-right: 10px;
 }
 
+.post-content {
+    white-space: pre-wrap;
+    /* 改行・空白をそのまま表示 */
+    word-wrap: break-word;
+    /* 長い単語は折り返す */
+}
+
 /* 投稿ボタン */
 .post-btn {
     border: none;
@@ -243,10 +254,88 @@ header {
     content: url('/images/trash-h.png');
 }
 
+/* 編集画面内 */
+/* 編集モーダルのオーバーレイ */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 黒い枠線や背景は削除 */
+    z-index: 1000;
+    background-color: transparent;
+}
+
+/* モーダル内 */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 中央寄せ */
+    min-width: 520px;
+    /* 横幅を少し広げる */
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* 子要素を横中央に揃える */
+    gap: 15px;
+    /* テキストエリアとボタンの間隔 */
+}
+
+
+
+/* テキストエリア */
+.modal-content textarea {
+    width: 650px;
+    height: 200px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    margin-bottom: 5px;
+}
+
+/* モーダル内のアイコンボタン */
+.modal-content .edit-submit-btn {
+    background-color: #fff;
+    /* 白背景 */
+    border: none;
+    /* 枠線なし */
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    /* 横中央に配置 */
+    transition: transform 0.2s ease;
+}
+
+.modal-content .edit-submit-btn:hover {
+    transform: scale(1.1);
+}
+
+/* アイコンサイズを投稿一覧と揃える */
+.modal-content .edit-submit-btn .edit-icon {
+    width: 40px;
+    height: 40px;
+}
+
+
+/* メイン全体 */
 .main-container {
     display: flex;
+    /* 左右並べる */
+    align-items: flex-start;
+    /* 上揃え */
     gap: 20px;
-    /* 左右の間隔 */
+    /* 左右の隙間 */
 }
 
 /* 左カラム */
@@ -686,7 +775,7 @@ header {
     align-items: center;
     gap: 55px;
     /* ラベルと入力欄の間の余白 */
-    margin-left: 300px;
+    margin-left: 350px;
     /* ラベル全体の左余白 */
 }
 
@@ -796,6 +885,66 @@ header {
     word-break: break-word;
     margin-left: 50px;
     margin-bottom: 3px;
+}
+
+/* input を非表示に */
+.icon-input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    /* 完全に透明にする */
+    position: absolute;
+    z-index: -1;
+    /* ラベルの下に隠す */
+    overflow: hidden;
+}
+
+/* ファイル選択ラベル */
+.icon-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    /* 残り幅を全部使用 */
+    height: 80px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.icon-label:hover {
+    background-color: #f0f0f0;
+}
+
+.form-group.form-inline {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* ラベルと選択ボックスの間隔 */
+}
+
+.file-text-label {
+    width: 120px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.file-label {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #fff;
+    /* 好きな色に */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ホバー効果 */
+.file-label:hover {
+    background-color: #f0f0f0;
 }
 
 /* ----------------- */
