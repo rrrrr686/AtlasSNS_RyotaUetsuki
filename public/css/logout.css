@@ -1,23 +1,22 @@
 @charset "UTF-8";
 
-/* ページ全体を縦横100%に */
+/* ページ全体を最小 100% に → スクロールしても背景が続く */
 html,
 body {
-    height: 100%;
+    min-height: 100%;
     margin: 0;
     padding: 0;
 }
 
-
-/* 背景：上が淡い青、下が黄色 */
+/* 背景グラデーション（下まで続くバージョン） */
 body {
-    background: linear-gradient(to bottom, #186AC9 50%,
-            #FFF200 100%);
+    background: linear-gradient(to bottom, #186AC9 50%, #FFF200 100%);
+    background-attachment: fixed;
+    /* ← スクロールしても切れない最重要 */
     color: #fff;
     font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;
-    overflow: hidden;
-    /* ← スクロール防止で余分なはみ出しを防ぐ */
 }
+
 
 /* ヘッダー（ロゴ部分） */
 header {

@@ -66,54 +66,56 @@
     </div>
   </div>
 
-  <!-- 編集モーダル -->
-<div id="editModal" class="modal" style="display:none;">
-  <div class="modal-content">
-    <form id="editForm" method="POST">
-      @csrf
-      @method('PUT')
-      <textarea name="post" id="editPostText" required></textarea>
+<!-- モーダル背景 -->
+<div id="editModal" class="modal-overlay" style="display:none;">
+    <!-- モーダル内容 -->
+    <div class="modal-content">
+        <form id="editForm" method="POST">
+            @csrf
+            @method('PUT')
 
-      <!-- 更新ボタンをアイコンに -->
-      <button type="submit" class="edit-submit-btn">
-        <img src="{{ asset('images/edit.png') }}" alt="編集" class="action-icon edit-icon">
-      </button>
-    </form>
-  </div>
+            <textarea name="post" id="editPostText" class="edit-textarea"></textarea>
+
+            <!-- 更新ボタン -->
+            <button type="submit" class="edit-submit-btn">
+                <img src="{{ asset('images/edit.png') }}" alt="編集" class="action-icon edit-icon">
+            </button>
+        </form>
+    </div>
 </div>
 
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const modal = document.getElementById('editModal');
-      const editForm = document.getElementById('editForm');
-      const editText = document.getElementById('editPostText');
 
-      document.querySelectorAll('.post-actions .edit-btn').forEach(btn => {
-  btn.addEventListener('click', function (e) {
-    e.preventDefault(); // フォーム送信を防ぐ
-    const postId = this.dataset.postId;
-    const postContent = this.dataset.postContent;
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const modal = document.getElementById('editModal');
+  const editForm = document.getElementById('editForm');
+  const editText = document.getElementById('editPostText');
 
-      console.log('編集する投稿ID:', postId); // ←確認用
+  document.querySelectorAll('.edit-btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
 
-    const editForm = document.getElementById('editForm');
-    const editText = document.getElementById('editPostText');
-    const modal = document.getElementById('editModal');
+      const postId = this.dataset.postId;
+      const postContent = this.dataset.postContent;
 
-    editForm.action = `/posts/${postId}`;
-    editText.value = postContent;
+      editForm.action = `/posts/${postId}`;
+      editText.value = postContent;
 
-    modal.style.display = 'block';
+      modal.style.display = 'block';
+    });
+  });
+
+  // 背景クリックで閉じる
+  window.addEventListener('click', function (e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
   });
 });
+</script>
 
 
-      closeBtn.addEventListener('click', () => modal.style.display = 'none');
-      window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
-      });
-    });
-  </script>
+
 
 </x-login-layout>
