@@ -5,19 +5,29 @@
       <!-- 投稿フォーム -->
       <div class="post-area">
         <div class="post-user-icon">
-          <img src="{{ Auth::user()->icon_image
-                       ? asset('storage/icons/' . Auth::user()->icon_image)
-                       : asset('storage/icons/icon1.png') }}"
-               alt="ユーザーアイコン" class="icon-img">
+          <img src="{{ Auth::user()->images
+         ? asset('storage/icons/' . Auth::user()->images)
+         : asset('images/icon1.png') }}"
+     alt="ユーザーアイコン" class="icon-img">
+
         </div>
 
         <form action="{{ route('posts.store') }}" method="POST" class="post-form">
-          @csrf
-          <textarea name="post" class="post-text" placeholder="投稿内容を入力してください。" required></textarea>
-          <button type="submit" class="post-btn">
-            <img src="{{ asset('images/post.png') }}" alt="投稿" class="post-icon">
-          </button>
-        </form>
+    @csrf
+    <textarea name="post" class="post-text" placeholder="投稿内容を入力してください。" required>{{ old('post') }}</textarea>
+
+    {{-- 投稿のバリデーションエラー表示 --}}
+    @if ($errors->has('post'))
+        <div class="error" style="color:red; font-size:14px; margin-top:5px;">
+            {{ $errors->first('post') }}
+        </div>
+    @endif
+
+    <button type="submit" class="post-btn">
+        <img src="{{ asset('images/post.png') }}" alt="投稿" class="post-icon">
+    </button>
+</form>
+
       </div>
 
       <!-- 投稿一覧 -->
@@ -27,10 +37,11 @@
 
             <!-- 左：アイコン -->
             <div class="post-user-icon-wrapper">
-              <img src="{{ $post->user->icon_image
-                           ? asset('storage/icons/' . $post->user->icon_image)
-                           : asset('storage/icons/icon1.png') }}"
-                   alt="ユーザーアイコン" class="post-user-icon">
+              <img src="{{ $post->user->images
+         ? asset('storage/icons/' . $post->user->images)
+         : asset('images/icon1.png') }}"
+     alt="ユーザーアイコン" class="post-user-icon">
+
             </div>
 
             <!-- 右：ユーザー名＋投稿文＋日時 -->
@@ -114,8 +125,5 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
-
-
-
 
 </x-login-layout>

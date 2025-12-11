@@ -65,8 +65,13 @@ class PostsController extends Controller
     }
 
     $request->validate([
-        'post' => 'required|string|max:500',
-    ]);
+    'post' => 'required|string|min:1|max:150',
+], [
+    'post.required' => '投稿内容を入力してください。',
+    'post.min' => '投稿内容は1文字以上で入力してください。',
+    'post.max' => '投稿内容は150文字以内で入力してください。',
+]);
+
 
     $post->post = $request->post;
     $post->save();

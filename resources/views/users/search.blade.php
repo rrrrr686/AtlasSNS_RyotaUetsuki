@@ -21,10 +21,10 @@
     @forelse ($users as $user)
         <div class="user-item">
             {{-- ユーザーアイコン（空なら icon1.png を表示） --}}
-            <img src="{{ $user->icon_image
-                 ? asset('storage/icons/' . $user->icon_image)
-                 : asset('storage/icons/icon1.png') }}"
-                 alt="ユーザーアイコン" class="user-icon">
+            <img src="{{ !empty($user->images)
+     ? asset('storage/icons/' . $user->images)
+     : asset('images/icon1.png') }}"
+     alt="ユーザーアイコン" class="user-icon">
 
             {{-- ユーザー名 --}}
             <span class="username">{{ $user->username }}</span>

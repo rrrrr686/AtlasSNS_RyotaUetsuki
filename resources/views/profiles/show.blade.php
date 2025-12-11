@@ -6,10 +6,11 @@
 
             <!-- 左：アイコン -->
             <div class="profile-header-icon">
-                <img src="{{ $user->icon_image
-                    ? asset('storage/icons/' . $user->icon_image)
-                    : asset('storage/icons/icon1.png') }}"
-                    alt="icon" class="profile-header-user-icon">
+                <img src="{{ $user->images
+    ? asset('storage/icons/' . $user->images)
+    : asset('images/icon1.png') }}"
+    alt="icon" class="profile-header-user-icon">
+
             </div>
 
             <!-- 右：ユーザー情報とフォローボタンを横並び -->
@@ -56,10 +57,10 @@
             <div class="profile-post-item">
 
                 <!-- 左：投稿者アイコン -->
-                <img src="{{ $post->user->icon_image
-                            ? asset('storage/icons/' . $post->user->icon_image)
-                            : asset('storage/icons/icon1.png') }}"
-                            alt="icon" class="post-user-icon">
+                <img src="{{ $post->user->images
+            ? asset('storage/icons/' . $post->user->images)
+            : asset('images/icon1.png') }}"
+    alt="icon" class="post-user-icon">
 
                 <!-- 右：ユーザー名 + 投稿文 -->
                 <div class="profile-post-content">

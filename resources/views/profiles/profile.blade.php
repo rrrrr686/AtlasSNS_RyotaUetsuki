@@ -15,12 +15,11 @@
 
                 <!-- 左アイコン -->
                 <div class="profile-left">
-    <img src="{{ $user->icon_image
-        ? asset('storage/icons/' . $user->icon_image)
-        : asset('images/icon1.png') }}"
-        alt="icon" class="user-icon">
+    <img src="{{ $user->images
+    ? asset('storage/icons/' . $user->images)
+    : asset('images/icon1.png') }}"
+    alt="icon" class="user-icon">
 </div>
-
 
                 <!-- 右フォーム -->
                 <div class="profile-right">
@@ -77,9 +76,9 @@
         ファイルを選択
     </label>
 
-    <input type="file" name="icon_image" id="icon_image" class="icon-input">
+    <input type="file" name="images" id="icon_image" class="icon-input">
 
-    @error('icon_image')
+    @error('images')
         <p class="error">{{ $message }}</p>
     @enderror
 </div>
