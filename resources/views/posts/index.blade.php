@@ -5,10 +5,15 @@
       <!-- 投稿フォーム -->
       <div class="post-area">
         <div class="post-user-icon">
-          <img src="{{ Auth::user()->images
-         ? asset('storage/icons/' . Auth::user()->images)
-         : asset('images/icon1.png') }}"
-     alt="ユーザーアイコン" class="icon-img">
+          <img
+    src="{{ asset(
+        Auth::user()->images === 'icon1.png'
+            ? 'images/icon1.png'
+            : 'storage/icons/' . Auth::user()->images) }}"
+    alt="ユーザーアイコン"
+    class="icon-img"
+>
+
 
         </div>
 
@@ -37,10 +42,15 @@
 
             <!-- 左：アイコン -->
             <div class="post-user-icon-wrapper">
-              <img src="{{ $post->user->images
-         ? asset('storage/icons/' . $post->user->images)
-         : asset('images/icon1.png') }}"
-     alt="ユーザーアイコン" class="post-user-icon">
+              <img
+    src="{{ asset(
+        $post->user->images === 'icon1.png'
+            ? 'images/icon1.png'
+            : 'storage/icons/' . $post->user->images) }}"
+    alt="ユーザーアイコン"
+    class="post-user-icon"
+>
+
 
             </div>
 

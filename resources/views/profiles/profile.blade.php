@@ -15,10 +15,15 @@
 
                 <!-- 左アイコン -->
                 <div class="profile-left">
-    <img src="{{ $user->images
-    ? asset('storage/icons/' . $user->images)
-    : asset('images/icon1.png') }}"
-    alt="icon" class="user-icon">
+    <img
+    src="{{ asset(
+        $user->images === 'icon1.png'
+            ? 'images/icon1.png'
+            : 'storage/icons/' . $user->images) }}"
+    alt="icon"
+    class="user-icon"
+>
+
 </div>
 
                 <!-- 右フォーム -->

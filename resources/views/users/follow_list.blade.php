@@ -7,10 +7,15 @@
     @forelse($followings as $following)
         <div class="following-item">
             <a href="{{ route('users.profile', $following->id) }}">
-                <img src="{{ $following->images
-    ? asset('storage/icons/' . $following->images)
-    : asset('images/icon1.png') }}"
-    alt="ユーザーアイコン" class="user-icon">
+                <img
+    src="{{ asset(
+        $following->images === 'icon1.png'
+            ? 'images/icon1.png'
+            : 'storage/icons/' . $following->images) }}"
+    alt="ユーザーアイコン"
+    class="user-icon"
+>
+
 
             </a>
         </div>
@@ -28,10 +33,14 @@
             <div class="post-item">
         <div class="post-header">
             <a href="{{ route('users.profile', $post->user->id) }}">
-                <img src="{{ $post->user->images
-    ? asset('storage/icons/' . $post->user->images)
-    : asset('images/icon1.png') }}"
-    alt="ユーザーアイコン" class="user-icon">
+                <img src="{{ asset(
+        $post->user->images === 'icon1.png'
+            ? 'images/icon1.png'
+            : 'storage/icons/' . $post->user->images) }}"
+    alt="ユーザーアイコン"
+    class="user-icon"
+>
+
 
             </a>
             <span class="username">{{ $post->user->username }}</span>

@@ -14,11 +14,16 @@
             <div class="accordion-header" id="menu-toggle">
                 <p>{{ Auth::user()->username }} さん</p>
                 <span class="arrow">❮</span>
-                <img src="{{ Auth::user()->images
-    ? asset('storage/icons/' . Auth::user()->images)
-    : asset('images/icon1.png') }}"
+                <img
+    src="{{ asset(
+        Auth::user()->images === 'icon1.png'
+            ? 'images/icon1.png'
+            : 'storage/icons/' . Auth::user()->images
+    ) }}"
     alt="ユーザーアイコン"
-    class="user-icon">
+    class="user-icon"
+>
+
 
 
             <!-- ドロップダウンメニュー -->

@@ -47,34 +47,30 @@ class ProfileController extends Controller
         'confirmed',
     ],
     'bio' => 'nullable|string|max:150',
-    'icon_image' => 'nullable|image|mimes:jpg,jpeg,png,bmp,gif,svg|max:2048',
+    'images' => 'nullable|image|mimes:jpg,jpeg,png,bmp,gif,svg|max:2048',
 ], [
-    // username
     'username.required' => 'ユーザー名は必須です。',
     'username.min' => 'ユーザー名は2文字以上で入力してください。',
     'username.max' => 'ユーザー名は12文字以内で入力してください。',
 
-    // email
     'email.required' => 'メールアドレスは必須です。',
     'email.email' => '有効なメールアドレス形式で入力してください。',
     'email.min' => 'メールアドレスは5文字以上で入力してください。',
     'email.max' => 'メールアドレスは40文字以内で入力してください。',
     'email.unique' => 'このメールアドレスは既に使用されています。',
 
-    // password
     'password.required' => 'パスワードは必須です。',
     'password.min' => 'パスワードは8文字以上で入力してください。',
     'password.max' => 'パスワードは20文字以内で入力してください。',
     'password.regex' => 'パスワードは半角英数字のみで入力してください。',
     'password.confirmed' => 'パスワード確認が一致しません。',
 
-    // bio
     'bio.max' => '自己紹介文は150文字以内で入力してください。',
 
-    // icon_image
-    'icon_image.image' => '画像ファイルを選択してください。',
-    'icon_image.mimes' => '画像は jpg、png、bmp、gif、svg のいずれかにしてください。',
+    'images.image' => '画像ファイルを選択してください。',
+    'images.mimes' => '画像は jpg、png、bmp、gif、svg のいずれかにしてください。',
 ]);
+
 
 
     // データ更新
@@ -86,9 +82,9 @@ class ProfileController extends Controller
     $user->password = Hash::make($request->password);
 
     // アイコン画像更新
-    if ($request->hasFile('icon_image')) {
-        $path = $request->file('icon_image')->store('icons', 'public');
-        $user->icon_image = basename($path);
+    if ($request->hasFile('images')) {
+        $path = $request->file('images')->store('icons', 'public');
+        $user->images = basename($path);
     }
 
     $user->save();

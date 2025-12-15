@@ -34,6 +34,7 @@ class RegisteredUserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'images' => 'icon1.png', // ← 新規登録時に icon1.png を入れる
         ]);
 
         return redirect('added');
